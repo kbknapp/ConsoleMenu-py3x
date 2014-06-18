@@ -5,6 +5,9 @@ from collections import deque
 import sys
 import subprocess
 
+__author__ = 'Kevin K. <kbknapp@gmail.com>'
+__version__ = '0.1'
+
 class ConsoleMenu(object):
 	def __init__(self, menu_path):
 		self.__options = dict()
@@ -27,9 +30,6 @@ class ConsoleMenu(object):
 					pkg_list.append(os.path.splitext(os.path.basename(f))[0])
 					pkg = '.'.join(pkg_list)
 					mod = __import__(pkg, fromlist=['.'.join(self.__mod_prefix)])
-					#print('p {}'.format(pkg))
-					#print('m {}'.format(mod))
-					#print('mp {}'.format(self.__mod_prefix))
 					if mod.otype.lower() == 'menu':
 						self.__options[str(i)] = [mod.short_name, mod.disp_name, 'menu', mod.sub_menu]
 					else:
