@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-Python 2.x and 3.x
+Python 3.x
 
 consolemenu.py creates a terminal menu structure based off
 the file system. consolemenu.py can be used standalone, or
