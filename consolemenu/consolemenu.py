@@ -6,10 +6,6 @@ consolemenu.py creates a terminal menu structure based off
 the file system. consolemenu.py can be used standalone, or
 as a library in a larger application.
 
-USAGE: consolemenu.py [FLAGS]
-	-h, --help	Displays help information
-	-v, --version	Displays version information
-
 Example Directory Structure:
 my_app/
   |
@@ -41,7 +37,7 @@ import sys
 import subprocess
 
 __author__ = 'Kevin K. <kbknapp@gmail.com>'
-__version__ = '0.1'
+__version__ = '0.2'
 
 class ConsoleMenu(object):
     def __init__(self, menu_path):
