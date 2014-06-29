@@ -25,7 +25,7 @@ Option Usage:
 For simple menu items the only include 4 fields:
 	+ short_name 	The name displayed in the menu bar
 	+ disp_name 	The name displayed to the user
-	+ otype 	'menu' or 'module'
+	+ otype 	'Menu' or 'Routine' (Denotes whether or not there is a run() function)
 	+ sub_menu 	The folder name containing sub menu options
 
 Options that perform an action have the above feilds as well
