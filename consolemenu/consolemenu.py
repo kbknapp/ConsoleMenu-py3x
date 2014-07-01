@@ -39,8 +39,8 @@ import subprocess
 __author__ = 'Kevin K. <kbknapp@gmail.com>'
 __version__ = '0.2'
 
-class ConsoleMenu(object, title=''):
-    def __init__(self, menu_path):
+class ConsoleMenu(object):
+    def __init__(self, menu_path, title=''):
         self.__options = dict()
         self.__history = deque()
         self.__basedir = os.path.dirname(os.path.realpath(__file__))
