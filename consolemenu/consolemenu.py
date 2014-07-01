@@ -22,13 +22,12 @@ my_app/
             +--Option3.py
 
 Option Usage:
-For simple menu items the only include 4 fields:
-	+ short_name 	The name displayed in the menu bar
-	+ disp_name 	The name displayed to the user
-	+ otype 	'Menu' or 'Routine' (Denotes whether or not there is a run() function)
-	+ sub_menu 	The folder name containing sub menu options
+For simple menu items the only include 3 fields:
+	+ short_name (The name displayed in the menu bar)
+	+ display_name (The name displayed to the user)
+	+ otype (name of directory containing sub menu options)
 
-Options that perform an action have the above feilds as well
+Options that perform an action have the above three feilds as well
 as the following addtional function:
 	+ run() (The "main()" of that module)
 """
@@ -40,12 +39,13 @@ import subprocess
 __author__ = 'Kevin K. <kbknapp@gmail.com>'
 __version__ = '0.2'
 
-class ConsoleMenu(object):
+class ConsoleMenu(object, title=''):
     def __init__(self, menu_path):
         self.__options = dict()
         self.__history = deque()
         self.__basedir = os.path.dirname(os.path.realpath(__file__))
         self.__mod_prefix = [os.path.basename(menu_path)]
+        self.__title = title
         self.__menu_bar = ['Home']
 
         self.build_options(menu_path)
@@ -90,10 +90,13 @@ class ConsoleMenu(object):
 
     def update_display(self):
         subprocess.call('clear')
+        if self.__title:
+        	print(self.__title)
+        	print('\n')
         print(' > '.join(self.__menu_bar))
         print('')
         for opt in sorted(self.__options):
-            print('{} - {}'.format(opt, self.__options[opt][1]))
+            print('\t{} - {}'.format(opt, self.__options[opt][1]))
         print('')
 
     def exit(self):
@@ -139,7 +142,7 @@ class ConsoleMenu(object):
         while True:
             self.update_display()
 
-            ans = input('> ')
+            ans = input('Option (q=Quit,b=Back): ')
             if ans:
                 if ans.lower() == 'b':
                     self.back()
