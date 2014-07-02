@@ -22,10 +22,11 @@ my_app/
             +--Option3.py
 
 Option Usage:
-For simple menu items the only include 3 fields:
+For simple menu items the only include 4 fields:
 	+ short_name (The name displayed in the menu bar)
-	+ display_name (The name displayed to the user)
-	+ otype (name of directory containing  sub menu options)
+	+ disp_name (The name displayed to the user)
+	+ otype 'menu' or 'routine' determines if this is menu option or actually does something
+	+ sub_menu (The directory name containing sub menu options)
 
 Options that perform an action have the above three feilds as well
 as the following addtional function:
@@ -184,8 +185,5 @@ if __name__ == '__main__':
 
     m_dir = os.path.join(os.path.dirname(__file__),'menu')
     cm = ConsoleMenu(m_dir)
-    try:
-        cm.enter_off()
-        cm.start()
-    except:
-        cm.enter_on()
+    cm.start()
+
