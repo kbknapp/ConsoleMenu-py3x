@@ -25,11 +25,17 @@ Option Usage:
 For simple menu items the only include 3 fields:
 	+ short_name (The name displayed in the menu bar)
 	+ display_name (The name displayed to the user)
-	+ otype (name of directory containing sub menu options)
+	+ otype (name of directory containing  sub menu options)
 
 Options that perform an action have the above three feilds as well
 as the following addtional function:
 	+ run() (The "main()" of that module)
+
+Commandline Usage: consolemenu.py [flags]
+
+FLAGS:
+    -v, --version       Display version information
+    -h, --help          Display help information
 """
 import os
 from collections import deque
@@ -37,7 +43,7 @@ import sys
 import subprocess
 
 __author__ = 'Kevin K. <kbknapp@gmail.com>'
-__version__ = '0.2'
+__version__ = '0.3.2'
 
 class ConsoleMenu(object):
     def __init__(self, menu_path, title=''):
@@ -151,7 +157,31 @@ class ConsoleMenu(object):
                 else:
                     self.do_option(ans)
 
+valid_args = {'v':'\nConsole Menu v{}\n'.format(__version__),
+                'h':'''
+Usage: consolemenu.py [flags]
+
+FLAGS:
+    -v, --version       Display version information
+    -h, --help          Display help information\n'''}
+
+def do_arg(arg):
+    if arg[0] != '-':
+        return
+    for c in arg:
+        if c == '-':
+            continue
+        c = c.lower()
+        if c in valid_args:
+            print(valid_args[c])
+            return
+
 if __name__ == '__main__':
+
+    if len(sys.argv) > 1:
+        do_arg(sys.argv[1])
+        sys.exit(0)
+
     m_dir = os.path.join(os.path.dirname(__file__),'menu')
     cm = ConsoleMenu(m_dir)
     try:
