@@ -44,7 +44,7 @@ import sys
 import subprocess
 
 __author__ = 'Kevin K. <kbknapp@gmail.com>'
-__version__ = '0.3.2'
+__version__ = '0.3.3'
 
 class ConsoleMenu(object):
     def __init__(self, menu_path, title=''):
