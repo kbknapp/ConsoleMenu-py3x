@@ -44,7 +44,7 @@ import sys
 import subprocess
 
 __author__ = 'Kevin K. <kbknapp@gmail.com>'
-__version__ = '0.3.2'
+__version__ = '0.3.4'
 
 class ConsoleMenu(object):
     def __init__(self, menu_path, title=''):
@@ -72,6 +72,8 @@ class ConsoleMenu(object):
                                 break
                     elif f in added:
                         continue
+                    elif f[-1] == '~':
+                    	continue
                     fm_list = ['.'.join(self.__mod_prefix)]
                     pkg = '{}.{}'.format(fm_list[0],os.path.splitext(os.path.basename(f))[0])
                     mod = __import__(pkg, fromlist=fm_list)
@@ -92,12 +94,11 @@ class ConsoleMenu(object):
                     self.__options[str(i)] = ['Quit', 'Quit', 'Routine', self.exit]
                 return
 
-
     def update_display(self):
         subprocess.call('clear')
         if self.__title:
-        	print(self.__title)
-        	print('\n')
+            print(self.__title)
+            print('\n')
         print(' > '.join(self.__menu_bar))
         print('')
         for opt in sorted(self.__options):
@@ -141,8 +142,6 @@ class ConsoleMenu(object):
         else:
             return
 
-
-
     def start(self):
         while True:
             self.update_display()
@@ -155,6 +154,7 @@ class ConsoleMenu(object):
                     self.exit()
                 else:
                     self.do_option(ans)
+
 
 valid_args = {'v':'\nConsole Menu v{}\n'.format(__version__),
                 'h':'''
@@ -184,4 +184,3 @@ if __name__ == '__main__':
     m_dir = os.path.join(os.path.dirname(__file__),'menu')
     cm = ConsoleMenu(m_dir)
     cm.start()
-
